@@ -5,7 +5,8 @@ class CreateProperties < ActiveRecord::Migration[7.0]
       t.integer :value
       t.string :location
       t.string :img_url
-      t.text :description
+      t.integer :user_id
+      t.string :description
 
       t.timestamps
     end
