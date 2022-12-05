@@ -3,7 +3,7 @@ class PropertiesController < ApplicationController
   def index
     render json: Property.all
   end
-  
+
   def show
     property = Property.find_by(id: params[:id])
     if property
@@ -13,7 +13,7 @@ class PropertiesController < ApplicationController
     end
   end
   def create
-    property = Property.create!(property_params)
+    property = @current_user.properties.create!(property_params)
     render json: bird, status: :created
   end
   def update
