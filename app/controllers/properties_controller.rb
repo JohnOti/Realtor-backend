@@ -1,4 +1,9 @@
 class PropertiesController < ApplicationController
+
+  def index
+    render json: Property.all
+  end
+  
   def show
     property = Property.find_by(id: params[:id])
     if property
@@ -8,7 +13,7 @@ class PropertiesController < ApplicationController
     end
   end
   def create
-    property = Property.create(property_params)
+    property = Property.create!(property_params)
     render json: bird, status: :created
   end
   def update
@@ -32,7 +37,7 @@ class PropertiesController < ApplicationController
   
   private
   def property_params
-    params.permit(:name, :value, :location, :description)
+    params.require(:property).permit(:name, :value, :location, :description, :img_url, :user_id)
   end
 
 end
