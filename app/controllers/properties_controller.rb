@@ -1,4 +1,5 @@
 class PropertiesController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
     render json: Property.all
@@ -14,7 +15,7 @@ class PropertiesController < ApplicationController
   end
   def create
     property = @current_user.properties.create!(property_params)
-    render json: bird, status: :created
+    render json: property, status: :created
   end
   def update
   property = Property.find_by(id: params[:id])
