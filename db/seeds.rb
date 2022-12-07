@@ -10,8 +10,8 @@
 puts "🌱 Seeding data..."
 
 #users
-user1 = User.create(username: Faker::Name.name, email: Faker::Internet.free_email, location: Faker::Address.city, phone_number: Faker::PhoneNumber.cell_phone_in_e164, professional_status: Faker::Boolean.boolean)
-puts user1
+# user1 = User.create(username: Faker::Name.name, email: Faker::Internet.free_email, location: Faker::Address.city, phone_number: Faker::PhoneNumber.cell_phone_in_e164, professional_status: Faker::Boolean.boolean)
+# puts user1
 # puts property1.location
 
 #properties
