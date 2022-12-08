@@ -1,4 +1,4 @@
-function HouseCard({ house, onDeleteHouse}) {
+function HouseCard({ house, onDeleteHouse, onUpdateHouse}) {
   const { id, name, value, location, description, img_url } = house;
 
   function handleDeleteClick() {

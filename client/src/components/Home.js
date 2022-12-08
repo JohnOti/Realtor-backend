@@ -6,7 +6,6 @@ import NewHouseForm from "./NewHouseForm";
 function Home() {
   const [houses, setHouses] = useState([]);
   const [serchTerm, setSearchTerm] = useState("");
-  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     fetch("/properties")
@@ -37,7 +36,7 @@ function Home() {
     }
 
   const displayHouses = houses.filter((house) => {
-    return house.toLowerCase().includes(serchTerm.toLowerCase());location;
+    return house.location.toLowerCase().includes(serchTerm.toLowerCase());
   });
 
   return (
