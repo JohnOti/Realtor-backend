@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function NewHouseForm({ onAddHouse },props) {
+function NewHouseForm({ onAddHouse }, props) {
   const [formData, setFormData] = useState({
     location: "",
     value: "",
@@ -8,37 +8,32 @@ function NewHouseForm({ onAddHouse },props) {
     img_url: "",
     name: "",
   });
-    
-    function handleChange(e) {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-      });
-    }
+
+  function handleChange(e) {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newHouse = {
-      ...formData,
-    };
+
     fetch("/properties", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newHouse),
+      body: JSON.stringify({
+        name: formData.name,
+        value: formData.value,
+        location: formData.location,
+        img_url: formData.img_url,
+        description: formData.description,
+      }),
     })
       .then((r) => r.json())
-      .then((data) => {
-        setFormData({
-          name: "",
-          value: "",
-          location: "",
-          img_url: "",
-          description: "",
-        });
-        onAddHouse(data);
-      });
+      .then((newHouse) => onAddHouse(newHouse));
   }
 
   return (
@@ -64,7 +59,7 @@ function NewHouseForm({ onAddHouse },props) {
         />
         <label htmlFor="location">Location</label>
         <input
-          value={formData.password}
+          value={formData.location}
           onChange={handleChange}
           type="Location"
           placeholder="location"
@@ -83,7 +78,7 @@ function NewHouseForm({ onAddHouse },props) {
 
         <label htmlFor="description">Description</label>
         <input
-          value={formData.location}
+          value={formData.description}
           onChange={handleChange}
           name="description"
           id="description"
