@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function NewHouseForm({ onAddHouse }, props) {
+function NewHouseForm({ onAddHouse }) {
   const [formData, setFormData] = useState({
     location: "",
     value: "",
@@ -88,7 +88,7 @@ function NewHouseForm({ onAddHouse }, props) {
       </form>
       <button
         className="link-btn"
-        onClick={() => props.onFormSwitch("login")}
+        // onClick={() => props.onFormSwitch("login")}
       ></button>
     </div>
   );
