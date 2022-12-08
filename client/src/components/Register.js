@@ -1,39 +1,52 @@
 import React, {useState} from "react";
-
-export default function Register(props) {
-
-    const [formData, setFormData] = useState({
-        username: "",
-        email: "",
-        password: "",
-        cfn_password: "",
-        phone_number: "",
-        location: "",
-        professional_status: "",
-    });
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e) => { 
-        e.preventDefault();
-        console.log(formData);
-
-        const newUser = {
-            ...formData
-        };
-
-        fetch('/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newUser)
-        })
-        .then(res => res.json())
-    };
-
+ import { useNavigate } from "react-router-dom";
+ const Register = ({ onAddUser }, props) => {
+   const navigate=useNavigate()
+   const [formData, setFormData] = useState({
+     username: "",
+     email: "",
+     password: "",
+     confirmation_password: "",
+     phone_number: "",
+     location: "",
+     professional_status: "",
+   });
+   function handleChange(e) {
+     setFormData({
+       ...formData,
+       [e.target.name]: e.target.value
+     })
+   }
+ const handleSubmit = (e) => { 
+         e.preventDefault();
+         console.log(formData);
+         const newUser = {
+             ...formData
+         };
+         fetch('/users', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify(newUser),
+         })
+           .then((r) => {
+             if (r.ok) {
+               r.json().then((data) => {
+                 console.log(data)
+                 setFormData({
+                   email: '',
+                   username: '',
+                   phone_number: '',
+                   location: '',
+                   professional_status: '',
+                 });
+                 navigate('/login')
+                 onAddUser(data);
+               });
+               };
+             });
+           };
     return (
       <div className="auth-form-container">
         <h2>Register</h2>
@@ -114,3 +127,4 @@ export default function Register(props) {
     );
 }
     
+export default Register;
