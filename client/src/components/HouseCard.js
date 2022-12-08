@@ -9,6 +9,7 @@ function HouseCard({ house, onDeleteHouse}) {
         onDeleteHouse(id);
       }
     });
+    window.location.reload(true);
   }
 
   return (
