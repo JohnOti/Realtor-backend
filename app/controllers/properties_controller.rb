@@ -36,7 +36,15 @@ class PropertiesController < ApplicationController
       render json: { error: "Property not found" }, status: :not_found
     end
   end
-  
+  def destroy
+    property = Property.find_by(id: params[:id])
+    if property
+    property.destroy
+    head :no_content
+    else
+      render json: { error: "Property not found" }, status: :not_found
+    end
+  end
   private
   def property_params
     params.require(:property).permit(:name, :value, :location, :description, :img_url, :user_id)
