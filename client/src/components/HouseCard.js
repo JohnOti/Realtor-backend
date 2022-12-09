@@ -12,6 +12,16 @@ function HouseCard({ house, onDeleteHouse, onUpdateHouse}) {
     window.location.reload(true);
   }
 
+  function handleDeleteClick() {
+    fetch(`/properties/${id}`, {
+      method: "UPDATE",
+    }).then((r) => {
+      if (r.ok) {
+        onDeleteHouse(id);
+      }
+    });
+    window.location.reload(true);
+  }
   return (
     <li className="card">
       <img src={img_url} alt={name} />
@@ -21,6 +31,8 @@ function HouseCard({ house, onDeleteHouse, onUpdateHouse}) {
       <p>Location: {location}</p>
 
       <button onClick={handleDeleteClick}>Delete</button>
+      <br></br>
+      <button onClick={handleDeleteClick}>Update</button>
     </li>
   );
 }
